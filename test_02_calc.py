@@ -37,13 +37,7 @@ def test_slow_calculator(browser):
     )
     delay_input.clear()
     delay_input.send_keys("45")
-    
-    # 3. Нажимаем кнопки: 7, +, 8, =
-    # Ждем появления калькулятора
-    calculator = wait.until(
-        EC.presence_of_element_located((By.CLASS_NAME, "calculator"))
-    )
-    
+       
     # Нажимаем кнопку 7
     button_7 = browser.find_element(By.XPATH, "//span[text()='7']")
     button_7.click()
@@ -73,4 +67,5 @@ def test_slow_calculator(browser):
     # Assert проверка
     assert final_result == "15", f"Ожидаемый результат '15', но получен '{final_result}'"
     
+
     print("Тест успешно пройден! Калькулятор показал результат 15 после 45 секунд.")
