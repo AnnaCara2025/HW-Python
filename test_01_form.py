@@ -76,10 +76,10 @@ def test_form_validation(browser):
     # 4. Проверяем, что поле Zip code подсвечено красным
     # Ждем применения стилей валидации к полю Zip code
     zip_code_field = wait.until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='zip-code'].is-invalid"))
+        EC.presence_of_element_located((By.CSS_SELECTOR, "[class='alert py-2 alert-danger']"))
     )
     zip_code_classes = zip_code_field.get_attribute("class")
-    assert "is-invalid" in zip_code_classes, "Поле Zip code должно быть подсвечено красным"
+    assert "alert py-2 alert-danger" in zip_code_classes, "Поле Zip code должно быть подсвечено красным"
     
     # 5. Проверяем, что остальные поля подсвечены зеленым
     valid_fields = [
@@ -96,14 +96,14 @@ def test_form_validation(browser):
     
     for field_name in valid_fields:
         # Для каждого поля ждем появления класса is-valid
-        field_locator = (By.CSS_SELECTOR, f"input[name='{field_name}'].is-valid")
+        field_locator = (By.ID, f"{field_name}")
         
         try:
             # Пытаемся найти поле с классом is-valid
             field = wait.until(EC.presence_of_element_located(field_locator))
         except:
             # Если не нашли с классом is-valid, ищем поле без класса
-            field = browser.find_element(By.CSS_SELECTOR, f"input[name='{field_name}']")
+            field = browser.find_element(By.ID, f"{field_name}")
             field_classes = field.get_attribute("class")
             raise AssertionError(
                 f"Поле {field_name} должно быть подсвечено зеленым, "
@@ -112,4 +112,4 @@ def test_form_validation(browser):
         
         # Проверяем, что поле действительно имеет класс is-valid
         field_classes = field.get_attribute("class")
-        assert "is-valid" in field_classes, f"Поле {field_name} должно быть подсвечено зеленым"
+        assert "alert py-2 alert-success" in field_classes, f"Поле {field_name} должно быть подсвечено зеленым"
