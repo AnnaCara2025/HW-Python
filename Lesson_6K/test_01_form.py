@@ -113,3 +113,4 @@ def test_form_validation(browser):
         # Проверяем, что поле действительно имеет класс is-valid
         field_classes = field.get_attribute("class")
         assert "alert py-2 alert-success" in field_classes, f"Поле {field_name} должно быть подсвечено зеленым"
+
