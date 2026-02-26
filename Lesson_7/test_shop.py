@@ -12,7 +12,7 @@ def driver():
     # Если geckodriver не в PATH, укажите путь: Service('/path/to/geckodriver')
     driver = webdriver.Firefox()
     driver.maximize_window()
-    yield driver
+/    yield driver
     driver.quit()
 
 def test_saucedemo_purchase(driver):
@@ -69,4 +69,5 @@ def test_saucedemo_purchase(driver):
 
     # 7. Проверка
     assert actual_total == expected_total, \
+
         f"Ожидалось {expected_total}, получено {actual_total}"
